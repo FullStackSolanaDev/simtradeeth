@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimTrade - Master the Market Without Risk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sim-green': '#6AF701',
+                        'sim-red': '#F80010',
+                        'sim-dark': '#1B2136',
+                    },
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #1B2136;
+            color: #ffffff;
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(27, 33, 54, 0.9), rgba(27, 33, 54, 0.9)), 
+                        url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+        }
+        .ethereum-badge {
+            background: linear-gradient(135deg, rgba(98,54,255,0.2) 0%, rgba(98,54,255,0.05) 100%);
+            border: 1px solid rgba(98,54,255,0.3);
+        }
+        .token-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #6AF701, #F80010);
+        }
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-sim-dark border-b border-gray-800 py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://i.ibb.co/PZtPzhrp/simtrade-logo.png" alt="SimTrade Logo" class="h-10 w-10">
+                <span class="text-xl font-bold text-white">SimTrade</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-gray-300 hover:text-sim-green transition">About</a>
+                <a href="#utility" class="text-gray-300 hover:text-sim-green transition">Utility</a>
+                <a href="#tokenomics" class="text-gray-300 hover:text-sim-green transition">Tokenomics</a>
+                <a href="#roadmap" class="text-gray-300 hover:text-sim-green transition">Roadmap</a>
+                <a href="#community" class="text-gray-300 hover:text-sim-green transition">Community</a>
+            </div>
+            <button class="md:hidden text-gray-300">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <div class="flex items-center mb-4">
+                    <img src="https://i.ibb.co/PZtPzhrp/simtrade-logo.png" alt="SimTrade Logo" class="h-16 w-16 mr-4">
+                    <span class="ethereum-badge text-xs px-3 py-1 rounded-full flex items-center">
+                        <img src="https://img.icons8.com/?size=100&id=50284&format=png&color=000000" class="h-4 w-4 mr-1" alt="Ethereum">
+                        Ethereum Utility Token
+                    </span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Master the Market <span class="text-sim-green">Without Risk</span></h1>
+                <p class="text-xl text-gray-300 mb-8">A simulated crypto trading platform built on Ethereum.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="bg-sim-green hover:bg-opacity-90 text-black font-bold py-3 px-8 rounded-lg transition duration-300 text-center">
+                        Launch App
+                    </a>
+                    <a href="https://t.me/SimTrade_ETH" class="border border-sim-red text-sim-red hover:bg-sim-red hover:bg-opacity-10 font-bold py-3 px-8 rounded-lg transition duration-300 text-center">
+                        Join Telegram
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-sim-green rounded-xl opacity-20 blur-2xl animate-pulse-slow"></div>
+                    <div class="relative bg-sim-dark border border-gray-700 rounded-xl p-6 w-full max-w-md">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <p class="text-gray-400">Simulated Portfolio</p>
+                                <p class="text-2xl font-bold">$10,000.00 <span class="text-sm text-sim-green">+2.4%</span></p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <div class="bg-gray-800 p-2 rounded-lg">
+                                    <i class="fas fa-chart-line text-sim-green"></i>
+                                </div>
+                                <div class="bg-gray-800 p-2 rounded-lg">
+                                    <i class="fas fa-wallet text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <img src="https://img.icons8.com/?size=100&id=50284&format=png&color=000000" class="h-6 w-6 mr-2" alt="ETH">
+                                    <span>ETH</span>
+                                </div>
+                                <div class="text-right">
+                                    <p>$3,245.67</p>
+                                    <p class="text-xs text-sim-green">0.85 ETH</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <img src="https://img.icons8.com/?size=100&id=icTiMgoOHSVy&format=png&color=000000" class="h-6 w-6 mr-2" alt="SOL">
+                                    <span>SOL</span>
+                                </div>
+                                <div class="text-right">
+                                    <p>$2,156.32</p>
+                                    <p class="text-xs text-sim-green">12.4 SOL</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <img src="https://img.icons8.com/?size=100&id=2mhXYLZct4Sd&format=png&color=000000" class="h-6 w-6 mr-2" alt="PEPE">
+                                    <span>PEPE</span>
+                                </div>
+                                <div class="text-right">
+                                    <p>$4,598.01</p>
+                                    <p class="text-xs text-sim-red">1.123456 PEPE</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-700 flex justify-between">
+                            <button class="bg-sim-green hover:bg-opacity-90 text-black font-bold py-2 px-4 rounded-lg text-sm transition">
+                                /buy
+                            </button>
+                            <button class="bg-sim-red hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg text-sm transition">
+                                /sell
+                            </button>
+                            <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition">
+                                /stats
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Welcome to <span class="text-sim-green">SimTrade</span></h2>
+            <div class="bg-sim-dark border border-gray-800 rounded-xl p-8 md:p-12 max-w-4xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                    SimTrade is a platform designed to help you sharpen your trading skills without risking real money. Whether you're a beginner or a pro testing new strategies, SimTrade offers a real-time, risk-free environment. We empower traders to learn, grow, and succeed—giving you the tools to practice trading with confidence.
+                </p>
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg text-center">
+                        <i class="fas fa-user-graduate text-sim-green text-3xl mb-2"></i>
+                        <p class="font-bold">Beginner Friendly</p>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg text-center">
+                        <i class="fas fa-shield-alt text-sim-green text-3xl mb-2"></i>
+                        <p class="font-bold">Risk Free</p>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg text-center">
+                        <i class="fas fa-chart-bar text-sim-green text-3xl mb-2"></i>
+                        <p class="font-bold">Real-time Data</p>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg text-center">
+                        <i class="fas fa-robot text-sim-green text-3xl mb-2"></i>
+                        <p class="font-bold">Telegram Bot</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Utility Overview -->
+    <section id="utility" class="py-20 px-6 bg-gray-900 bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Learn by Doing – <span class="text-sim-green">Without the Risk</span></h2>
+            <p class="text-xl text-gray-400 mb-12 text-center max-w-3xl mx-auto">
+                SimTrade offers a paper trading experience using a Telegram bot with virtual ETH and SOL wallets.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-8">
+                    <div class="bg-gray-800 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-terminal text-sim-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Simple Commands</h3>
+                    <p class="text-gray-400 mb-4">
+                        Execute trades with easy-to-remember commands right in Telegram:
+                    </p>
+                    <div class="space-y-2">
+                        <div class="bg-gray-800 rounded-lg p-3 font-mono text-sm">
+                            <span class="text-sim-green">/buy</span> $SIM 0.15 ETH
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 font-mono text-sm">
+                            <span class="text-sim-red">/sell</span> $PEPE 50%
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 font-mono text-sm">
+                            <span class="text-gray-400">/stats</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-8">
+                    <div class="bg-gray-800 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-pie text-sim-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Track Performance</h3>
+                    <p class="text-gray-400 mb-4">
+                        Analyze your trades, test strategies, and track performance—all while keeping your real funds safe.
+                    </p>
+                    <div class="bg-gray-800 rounded-lg p-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Win Rate</span>
+                            <span class="text-sim-green">72%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-sim-green h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <span>Profit/Loss</span>
+                            <span class="text-sim-green">+$1,245.32</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-8">
+                    <div class="bg-gray-800 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-sim-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Crypto Sandbox</h3>
+                    <p class="text-gray-400 mb-4">
+                        SimTrade is your safe space to experiment with crypto trading strategies.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-1 rounded-full mr-3">
+                                <i class="fas fa-check text-sim-green text-xs"></i>
+                            </div>
+                            <span>Real-time market prices</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-1 rounded-full mr-3">
+                                <i class="fas fa-check text-sim-green text-xs"></i>
+                            </div>
+                            <span>Virtual ETH & SOL wallets</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-1 rounded-full mr-3">
+                                <i class="fas fa-check text-sim-green text-xs"></i>
+                            </div>
+                            <span>Historical trade analysis</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-1 rounded-full mr-3">
+                                <i class="fas fa-check text-sim-green text-xs"></i>
+                            </div>
+                            <span>Performance metrics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Who Can Benefit from <span class="text-sim-green">SimTrade?</span></h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-6 hover:border-sim-green transition group">
+                    <div class="bg-gray-800 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-sim-green group-hover:bg-opacity-20 transition">
+                        <i class="fas fa-user text-sim-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Beginners</h3>
+                    <p class="text-gray-400 text-sm">
+                        Learn the fundamentals of crypto trading without financial risk.
+                    </p>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-6 hover:border-sim-green transition group">
+                    <div class="bg-gray-800 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-sim-green group-hover:bg-opacity-20 transition">
+                        <i class="fas fa-chess-knight text-sim-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Strategists</h3>
+                    <p class="text-gray-400 text-sm">
+                        Test new trading approaches before committing real capital.
+                    </p>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-6 hover:border-sim-green transition group">
+                    <div class="bg-gray-800 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-sim-green group-hover:bg-opacity-20 transition">
+                        <i class="fas fa-brain text-sim-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Psychology</h3>
+                    <p class="text-gray-400 text-sm">
+                        Improve decision-making under market pressure.
+                    </p>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-6 hover:border-sim-green transition group">
+                    <div class="bg-gray-800 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-sim-green group-hover:bg-opacity-20 transition">
+                        <i class="fas fa-trophy text-sim-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Competitors</h3>
+                    <p class="text-gray-400 text-sm">
+                        Challenge others and track your progress on leaderboards.
+                    </p>
+                </div>
+                
+                <div class="bg-sim-dark border border-gray-800 rounded-xl p-6 hover:border-sim-green transition group">
+                    <div class="bg-gray-800 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-sim-green group-hover:bg-opacity-20 transition">
+                        <i class="fas fa-chalkboard-teacher text-sim-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Educators</h3>
+                    <p class="text-gray-400 text-sm">
+                        Perfect tool for teaching crypto trading concepts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics -->
+    <section id="tokenomics" class="py-20 px-6 bg-gray-900 bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center"><span class="text-sim-green">$SIM</span> Tokenomics</h2>
+            <p class="text-xl text-gray-400 mb-12 text-center">
+                SimTrade Token – Powering the platform's ecosystem
+            </p>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <div class="bg-sim-dark border border-gray-800 rounded-xl p-8 mb-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-gray-400 mb-1">Token Name</p>
+                                <p class="text-xl font-bold">SimTrade</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 mb-1">Ticker</p>
+                                <p class="text-xl font-bold">$SIM</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 mb-1">Blockchain</p>
+                                <p class="text-xl font-bold flex items-center">
+                                    <img src="https://img.icons8.com/?size=100&id=50284&format=png&color=000000" class="h-5 w-5 mr-2" alt="Ethereum">
+                                    Ethereum
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 mb-1">Total Supply</p>
+                                <p class="text-xl font-bold">1,000,000,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-sim-dark border border-gray-800 rounded-xl p-4 flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-2 rounded-lg mr-3">
+                                <i class="fas fa-lock text-sim-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Tax</p>
+                                <p class="font-bold">3%</p>
+                            </div>
+                        </div>
+                        <div class="bg-sim-dark border border-gray-800 rounded-xl p-4 flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-2 rounded-lg mr-3">
+                                <i class="fas fa-lock text-sim-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Liquidity</p>
+                                <p class="font-bold">100% Locked</p>
+                            </div>
+                        </div>
+                        <div class="bg-sim-dark border border-gray-800 rounded-xl p-4 flex items-center">
+                            <div class="bg-sim-green bg-opacity-20 p-2 rounded-lg mr-3">
+                                <i class="fas fa-check-circle text-sim-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Ownership</p>
+                                <p class="font-bold">Renounced</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+    <div class="bg-sim-dark border border-gray-800 rounded-xl p-8 h-full">
+        <h3 class="text-xl font-bold mb-6">Token Distribution</h3>
+        <div class="flex justify-center">
+            <div class="relative w-64 h-64">
+                <!-- Pie chart representation -->
+                <!-- 80% Liquidity -->
+                <div class="absolute inset-0 rounded-full border-8 border-sim-green"
+                     style="clip-path: polygon(50% 50%, 100% 50%, 100% 0, 0 0, 0 100%, 100% 100%, 100% 50%);
+                            transform: rotate(0deg);"></div>
+                <!-- 10% Marketing -->
+                <div class="absolute inset-0 rounded-full border-8 border-sim-red"
+                     style="clip-path: polygon(50% 50%, 100% 50%, 100% 0);
+                            transform: rotate(288deg);"></div>
+                <!-- 5% Development -->
+                <div class="absolute inset-0 rounded-full border-8 border-purple-500"
+                     style="clip-path: polygon(50% 50%, 100% 50%, 100% 0);
+                            transform: rotate(324deg);"></div>
+                <!-- 5% Team -->
+                <div class="absolute inset-0 rounded-full border-8 border-blue-500"
+                     style="clip-path: polygon(50% 50%, 100% 50%, 100% 0);
+                            transform: rotate(342deg);"></div>
+
+                <!-- Center circle -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-sim-dark rounded-full w-32 h-32 flex items-center justify-center border border-gray-700">
+                        <span class="text-2xl font-bold">$SIM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="flex items-center">
+                <div class="w-4 h-4 bg-sim-green rounded-full mr-2"></div>
+                <span>80% Liquidity</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 bg-sim-red rounded-full mr-2"></div>
+                <span>10% Marketing</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 bg-purple-500 rounded-full mr-2"></div>
+                <span>5% Development</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                <span>5% Team</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Our <span class="text-sim-green">Roadmap</span></h2>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="hidden md:block absolute left-1/2 h-full w-1 bg-gradient-to-b from-sim-green to-sim-red -ml-0.5"></div>
+                
+                <!-- Roadmap items -->
+                <div class="space-y-8 md:space-y-16">
+                    <!-- Stage 1 -->
+                    <div class="relative md:grid md:grid-cols-2 gap-8">
+                        <div class="md:text-right md:pr-12 mb-4 md:mb-0">
+                            <div class="inline-block bg-sim-green text-black font-bold py-1 px-3 rounded-full text-sm mb-2">Q1 2025</div>
+                            <h3 class="text-2xl font-bold mb-2">Stage 1 - Foundation</h3>
+                        </div>
+                        <div class="relative roadmap-item bg-sim-dark border border-gray-800 rounded-xl p-6 pl-10 md:pl-6">
+                            <div class="absolute -left-3 md:left-auto md:-right-3 top-6 w-6 h-6 bg-sim-green rounded-full border-4 border-sim-dark"></div>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-sim-green mt-1 mr-2"></i>
+                                    <span>Launch SimTrade Bot with /buy, /sell, /stats, /topup commands</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-sim-green mt-1 mr-2"></i>
+                                    <span>Open beta testing phase</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-sim-green mt-1 mr-2"></i>
+                                    <span>Build Telegram & Discord community</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Stage 2 -->
+                    <div class="relative md:grid md:grid-cols-2 gap-8">
+                        <div class="md:text-right md:pr-12 mb-4 md:mb-0 order-2 md:order-1">
+                            <div class="inline-block bg-sim-green text-black font-bold py-1 px-3 rounded-full text-sm mb-2">Q2 2025</div>
+                            <h3 class="text-2xl font-bold mb-2">Stage 2 - Expansion</h3>
+                        </div>
+                        <div class="relative roadmap-item bg-sim-dark border border-gray-800 rounded-xl p-6 pl-10 md:pl-6 order-1 md:order-2">
+                            <div class="absolute -left-3 md:left-auto md:-right-3 top-6 w-6 h-6 bg-sim-green rounded-full border-4 border-sim-dark"></div>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Add more trading pairs (BNB, ADA, CRO, etc.)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Launch performance analytics dashboard</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Implement leaderboards and achievements</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Publish educational content series</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Stage 3 -->
+                    <div class="relative md:grid md:grid-cols-2 gap-8">
+                        <div class="md:text-right md:pr-12 mb-4 md:mb-0">
+                            <div class="inline-block bg-sim-green text-black font-bold py-1 px-3 rounded-full text-sm mb-2">Q3 2025</div>
+                            <h3 class="text-2xl font-bold mb-2">Stage 3 - Maturity</h3>
+                        </div>
+                        <div class="relative roadmap-item bg-sim-dark border border-gray-800 rounded-xl p-6 pl-10 md:pl-6">
+                            <div class="absolute -left-3 md:left-auto md:-right-3 top-6 w-6 h-6 bg-sim-green rounded-full border-4 border-sim-dark"></div>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Launch tournaments & trading challenges</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Introduce premium features for power users</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Partner with crypto communities and projects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle text-gray-400 mt-1 mr-2"></i>
+                                    <span>Mobile app development begins</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community -->
+    <section id="community" class="py-20 px-6 bg-gray-900 bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the <span class="text-sim-green">Community</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Trade smart. Trade together. Join our community of traders and learners.
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between bg-sim-dark border border-gray-800 rounded-xl p-8 max-w-4xl mx-auto">
+                <div class="mb-8 md:mb-0 md:mr-8">
+                    <h3 class="text-2xl font-bold mb-4">SimTrade – where virtual money builds real skills.</h3>
+                    <p class="text-gray-400 mb-6">
+                        Connect with us to stay updated on new features, participate in trading challenges, and grow your skills alongside our community.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://x.com/simtrade_eth" class="bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitter text-blue-400 text-xl"></i>
+                        </a>
+                        <a href="https://t.me/SimTrade_ETH" class="bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-telegram text-blue-500 text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-6 text-center">
+                    <div class="bg-sim-green bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-paper-plane text-sim-green text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">Join Our Telegram</h4>
+                    <p class="text-gray-400 text-sm mb-4">Get started with the SimTrade bot today</p>
+                    <a href="https://t.me/SimTrade_ETH" class="bg-sim-green hover:bg-opacity-90 text-black font-bold py-3 px-6 rounded-lg inline-block transition">
+                        Join Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <img src="https://i.ibb.co/PZtPzhrp/simtrade-logo.png" alt="SimTrade Logo" class="h-10 w-10 mr-3">
+                    <span class="text-xl font-bold">SimTrade</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+                    <a href="#about" class="text-gray-400 hover:text-sim-green transition">About</a>
+                    <a href="#utility" class="text-gray-400 hover:text-sim-green transition">Utility</a>
+                    <a href="#tokenomics" class="text-gray-400 hover:text-sim-green transition">Tokenomics</a>
+                    <a href="#roadmap" class="text-gray-400 hover:text-sim-green transition">Roadmap</a>
+                    <a href="#community" class="text-gray-400 hover:text-sim-green transition">Community</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://x.com/simtrade_eth" class="text-gray-400 hover:text-blue-400 transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="https://t.me/SimTrade_ETH" class="text-gray-400 hover:text-blue-500 transition">
+                        <i class="fab fa-telegram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2024 SimTrade. All rights reserved. SimTrade is a simulated trading platform and does not involve real financial transactions.</p>
+                <p class="mt-2">This product is not affiliated with or endorsed by Ethereum or any other blockchain project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
